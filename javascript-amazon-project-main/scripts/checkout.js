@@ -1,9 +1,11 @@
-import { cart, updateDeliveryOption } from "../data/cart.js";
+ import { cart, updateDeliveryOption } from "../data/cart.js";
 import { products } from "../data/products.js";
 import { formatCurrency } from "./Utils/money.js";
 import { removeFromCart } from "../data/cart.js";
 import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';
 import { deliveryOptions } from "../data/delivery.js";
+
+function renderOrderSummary(){
 
 let cartSummaryHTML = '';
 
@@ -22,7 +24,7 @@ cart.forEach((cartItem) => {
 
     if (matchingProduct) {
         cartSummaryHTML += `
-         <div class="cart-item-container js-cart-item-container-${matchingProduct.id}">
+          <div class="cart-item-container js-cart-item-container-${matchingProduct.id}">
             <div class="delivery-date">
               Delivery date: ${dateString}
             </div>
@@ -91,7 +93,7 @@ function deliveryOptionsHTML(cartItem) {
         `;
     });
 
-    html += `</div>`; // Close the delivery-options div
+    html += `</div>`; 
     return html;
 }
 
@@ -112,5 +114,9 @@ document.querySelectorAll('.js-delivery-option').forEach((element) => {
         const productId = element.dataset.productId;
         const deliveryOptionId = element.dataset.deliveryOptionId;
         updateDeliveryOption(productId, deliveryOptionId);
-    });
-});
+        renderOrderSummary();
+          });
+  });
+};
+
+renderOrderSummary();

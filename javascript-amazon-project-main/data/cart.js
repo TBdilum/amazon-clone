@@ -55,4 +55,4 @@ export function updateDeliveryOption(productId, deliveryOptionsId) {
     } else {
         console.error(`Product ${productId} not found in the cart.`);
     }
-}
+};
