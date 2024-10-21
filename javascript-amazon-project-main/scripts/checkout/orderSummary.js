@@ -4,6 +4,7 @@ import { formatCurrency } from "../Utils/money.js";
 import { removeFromCart } from "../../data/cart.js";
 import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';
 import { deliveryOptions } from "../../data/delivery.js";
+import { getProduct } from '../../data/products.js';
 
 export function renderOrderSummary(){
 
@@ -11,7 +12,7 @@ let cartSummaryHTML = '';
 
 cart.forEach((cartItem) => {
     const productId = cartItem.productId;
-    const matchingProduct = products.find(product => product.id === productId);
+    const matchingProduct = getProduct(productId);
     const deliveryOptionId = cartItem.deliveryOptionsId; 
     const deliveryOption = deliveryOptions.find(option => option.id === deliveryOptionId);
 
